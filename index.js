@@ -25,7 +25,7 @@ app.use('/comments', commentsRouter)
 async function startApp() {
     try {
         await mongoose
-            .connect(DB_URL)
+            .connect(process.env.MONGODB_URL)
             .then(() => {console.log('💾DB OK💾')})
             .catch((err) => console.log('🚫DB ERR🚫', err))
 
