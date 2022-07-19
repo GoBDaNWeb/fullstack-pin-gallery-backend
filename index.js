@@ -6,10 +6,9 @@ import userRouter from './routers/userRouter.js'
 import postRouter from './routers/postRouter.js'
 import uploadRouter from './routers/uploadRouter.js'
 import commentsRouter from './routers/commentsRouter.js'
-// import commentsRouter from './routes/commentsRouter.js'
 
-const DB_URL = `mongodb+srv://admin:Dfhufcvfrttdrf20@cluster0.laldgpt.mongodb.net/application?retryWrites=true&w=majority`
-const PORT = 7777
+// const DB_URL = `mongodb+srv://admin:Dfhufcvfrttdrf20@cluster0.laldgpt.mongodb.net/application?retryWrites=true&w=majority`
+// const PORT = 7777
 
 const app = express()
 
@@ -29,7 +28,7 @@ async function startApp() {
             .then(() => {console.log('💾DB OK💾')})
             .catch((err) => console.log('🚫DB ERR🚫', err))
 
-        app.listen(process.env.PORT || PORT, (err) => {
+        app.listen(process.env.PORT || 7777, (err) => {
             if (err) {
                 return console.log(err)
             }
