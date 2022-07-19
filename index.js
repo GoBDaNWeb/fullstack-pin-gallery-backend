@@ -29,7 +29,7 @@ async function startApp() {
             .then(() => {console.log('💾DB OK💾')})
             .catch((err) => console.log('🚫DB ERR🚫', err))
 
-        app.listen(process.env.PORT, (err) => {
+        app.listen(process.env.PORT || PORT, (err) => {
             if (err) {
                 return console.log(err)
             }
