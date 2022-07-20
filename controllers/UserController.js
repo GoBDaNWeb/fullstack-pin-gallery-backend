@@ -114,9 +114,6 @@ export const getUser = async (req, res) => {
 
 export const getMe = async (req, res) => {
     try {
-        res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
         const user = await UserModel.findById(req.userId)
         
         if (!user) {
