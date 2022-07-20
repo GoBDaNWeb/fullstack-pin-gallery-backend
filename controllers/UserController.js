@@ -112,27 +112,11 @@ export const getUser = async (req, res) => {
     }
 }
 
-// export const getSavedPosts = async (req, res) => {
-//     try {
-//         const user = await UserModel.findById(req.params.id).populate(
-//             {
-//                 path: 'pined.author',
-//                 select: 'firstName lastName avatarUrl  '
-//             }
-//         ).exec()
-
-//         res.json(user.pined)
-//     } catch (err) {
-//         console.log(err);
-//         res.status(500).json({
-//             success: false,
-//             message: 'Неn доступа'
-//         })
-//     }
-// }
-
 export const getMe = async (req, res) => {
     try {
+        res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
         const user = await UserModel.findById(req.userId)
         
         if (!user) {

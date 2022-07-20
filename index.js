@@ -7,17 +7,11 @@ import postRouter from './routers/postRouter.js'
 import uploadRouter from './routers/uploadRouter.js'
 import commentsRouter from './routers/commentsRouter.js'
 
-// const DB_URL = `mongodb+srv://admin:Dfhufcvfrttdrf20@cluster0.laldgpt.mongodb.net/application?retryWrites=true&w=majority`
-// const PORT = 7777
+const DB_URL = `mongodb+srv://admin:Dfhufcvfrttdrf20@cluster0.laldgpt.mongodb.net/application?retryWrites=true&w=majority`
+const PORT = 7777
 
 const app = express()
 
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
- });
 
 app.use('/uploads', express.static('uploads'))
 app.use(express.json())
@@ -32,6 +26,7 @@ async function startApp() {
     try {
         await mongoose
             .connect(process.env.MONGODB_URL)
+            // .connect(DB_URL)
             .then(() => {console.log('💾DB OK💾')})
             .catch((err) => console.log('🚫DB ERR🚫', err))
 
