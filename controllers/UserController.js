@@ -36,10 +36,12 @@ export const register = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({
-      success: false,
-      message: err.message,
-    });
+    res.status(500).json([
+      {
+        success: false,
+        msg: err.msg,
+      },
+    ]);
   }
 };
 
@@ -48,10 +50,12 @@ export const login = async (req, res) => {
     const user = await UserModel.findOne({ email: req.body.email });
 
     if (!user) {
-      return res.status(400).json({
-        success: false,
-        message: "не удалось авторизоваться",
-      });
+      return res.status(400).json([
+        {
+          success: false,
+          msg: "не удалось авторизоваться",
+        },
+      ]);
     }
 
     const validPassword = await bcrypt.compare(
@@ -60,10 +64,12 @@ export const login = async (req, res) => {
     );
 
     if (!validPassword) {
-      return res.status(400).json({
-        success: false,
-        message: "Неверный логин или пароль",
-      });
+      return res.status(400).json([
+        {
+          success: false,
+          msg: "Неверный логин или пароль",
+        },
+      ]);
     }
 
     const token = jwt.sign(
@@ -84,10 +90,12 @@ export const login = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({
-      success: false,
-      message: "Не удалось авторизоваться",
-    });
+    res.status(500).json([
+      {
+        success: false,
+        msg: "Не удалось авторизоваться",
+      },
+    ]);
   }
 };
 
@@ -97,7 +105,7 @@ export const getUser = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     }
 
@@ -108,7 +116,7 @@ export const getUser = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Неn доступа",
+      msg: "Неn доступа",
     });
   }
 };
@@ -120,7 +128,7 @@ export const getMe = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     }
 
@@ -131,7 +139,7 @@ export const getMe = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Неn доступа",
+      msg: "Неn доступа",
     });
   }
 };
@@ -143,7 +151,7 @@ export const getPined = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     }
 
@@ -152,7 +160,7 @@ export const getPined = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Неn доступа",
+      msg: "Неn доступа",
     });
   }
 };
@@ -164,7 +172,7 @@ export const userUpdateAvatar = async (req, res) => {
     if (!userId) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     }
 
@@ -183,14 +191,14 @@ export const userUpdateAvatar = async (req, res) => {
           console.log(err);
           return res.status(500).json({
             success: false,
-            message: "не удалось обновить аватар",
+            msg: "не удалось обновить аватар",
           });
         }
 
         if (!doc) {
           return res.status(404).json({
             success: false,
-            message: "пользотватель не найден",
+            msg: "пользотватель не найден",
           });
         }
 
@@ -201,7 +209,7 @@ export const userUpdateAvatar = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Неn доступа",
+      msg: "Неn доступа",
     });
   }
 };
@@ -214,7 +222,7 @@ export const userSavePin = async (req, res) => {
     if (!userId) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     }
 
@@ -242,14 +250,14 @@ export const userSavePin = async (req, res) => {
           console.log(err);
           return res.status(500).json({
             success: false,
-            message: "не удалось поставить дизлайк",
+            msg: "не удалось поставить дизлайк",
           });
         }
 
         if (!doc) {
           return res.status(404).json({
             success: false,
-            message: "пост не найдена",
+            msg: "пост не найдена",
           });
         }
 
@@ -260,7 +268,7 @@ export const userSavePin = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Нет доступа",
+      msg: "Нет доступа",
     });
   }
 };
@@ -272,12 +280,12 @@ export const userRemovePin = async (req, res) => {
     if (!userId) {
       return res.status(404).json({
         success: false,
-        message: "Пользователь не найден",
+        msg: "Пользователь не найден",
       });
     } else if (!pinId) {
       return res.status(404).json({
         success: false,
-        message: "Пин не найден",
+        msg: "Пин не найден",
       });
     }
 
@@ -292,7 +300,7 @@ export const userRemovePin = async (req, res) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: "Нет доступа",
+      msg: "Нет доступа",
     });
   }
 };
